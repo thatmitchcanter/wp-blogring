@@ -117,11 +117,6 @@ class Wp_Blogring {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-blogring-routes.php';		
 
 		/**
-		 * The class responsible for augmenting the link functionality to work in spite of issues with collision of object IDs in Term Relationships.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-blogring-link-augment.php';			
-
-		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-blogring-admin.php';
