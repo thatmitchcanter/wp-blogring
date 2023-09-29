@@ -30,16 +30,7 @@ class Wp_Blogring_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-		// global $wpdb; // WordPress database object
-	
-		// // Define the SQL query to remove the custom column from wp_links table
-		// $sql = "
-		// 	ALTER TABLE {$wpdb->prefix}links
-		// 	DROP COLUMN link_category;
-		// ";
-	
-		// // Run the SQL query
-		// $wpdb->query($sql);
+
 	}
 
 }
