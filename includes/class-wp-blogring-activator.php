@@ -30,7 +30,16 @@ class Wp_Blogring_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		global $wpdb; // WordPress database object
 
+		// Define the SQL query to add custom columns to wp_links table
+		$sql = "
+			ALTER TABLE {$wpdb->prefix}links
+			ADD COLUMN link_category VARCHAR(255);
+		";
+	
+		// Run the SQL query
+		$wpdb->query($sql);
 	}
 
 }

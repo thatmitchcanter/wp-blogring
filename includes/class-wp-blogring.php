@@ -112,6 +112,16 @@ class Wp_Blogring {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-blogring-i18n.php';
 
 		/**
+		 * The class responsible for defining the route and populating it with a random link.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-blogring-routes.php';		
+
+		/**
+		 * The class responsible for augmenting the link functionality to work in spite of issues with collision of object IDs in Term Relationships.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-blogring-link-augment.php';			
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-blogring-admin.php';
@@ -120,7 +130,7 @@ class Wp_Blogring {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-blogring-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-blogring-public.php';	
 
 		$this->loader = new Wp_Blogring_Loader();
 
@@ -176,11 +186,12 @@ class Wp_Blogring {
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
+	 * Run the loader to load in the links menu, rename it, and execute all of the hooks with WordPress.
 	 *
 	 * @since    1.0.0
 	 */
 	public function run() {
+		$this->loader->setup();
 		$this->loader->run();
 	}
 

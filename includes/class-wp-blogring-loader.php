@@ -1,16 +1,6 @@
 <?php
 
 /**
- * Register all actions and filters for the plugin
- *
- * @link       https://mitchcanter.me
- * @since      1.0.0
- *
- * @package    Wp_Blogring
- * @subpackage Wp_Blogring/includes
- */
-
-/**
  * Register all actions and filters for the plugin.
  *
  * Maintain a list of all hooks that are registered throughout
@@ -110,6 +100,22 @@ class Wp_Blogring_Loader {
 	}
 
 	/**
+	 * Setup function to re-enable and rename the Links Manager that powers the BlogRing
+	 *
+	 * @since    1.0.0
+	 */
+	public function setup(){
+
+		add_filter( 'pre_option_link_manager_enabled', '__return_true' );		
+		function wpbr_admin_menu_rename() {
+			global $menu; // Global to get menu array
+			$menu[15][0] = 'WP BlogRoll';
+		}
+		add_action( 'admin_menu', 'wpbr_admin_menu_rename' );
+	
+	}	
+
+	/**
 	 * Register the filters and actions with WordPress.
 	 *
 	 * @since    1.0.0
@@ -122,19 +128,8 @@ class Wp_Blogring_Loader {
 
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
-		}
+		}			
 
-		/**
-		 * Re-enable and rename the Links Manager that powers the BlogRing
-		 *
-		 * @since    1.0.0
-		 */
-		add_filter( 'pre_option_link_manager_enabled', '__return_true' );		
-		function wpbr_admin_menu_rename() {
-			global $menu; // Global to get menu array
-			$menu[15][0] = 'WP BlogRoll';
-	   }
-	   add_action( 'admin_menu', 'wpbr_admin_menu_rename' );
 	}
 
 }
